@@ -1,0 +1,7 @@
+// include customized bootstrap
+@use 'bs_custom';
+
+// include bootstrap icons
+// override font dir first
+$bootstrap-icons-font-dir: '~/bootstrap-icons/font/fonts'; // '~' pointed as node_modules alias at vite.config
+@import '../../../node_modules/bootstrap-icons/font/bootstrap-icons.scss';
