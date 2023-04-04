@@ -1,8 +1,8 @@
-// import Header from '@/components/Header.js'
+import Header from '@/components/Header.js'
 import Main from '@/components/Main.js'
 
 export default function App(app) {
-	// app.appendChild(Header())
+	app.appendChild(Header())
 	app.appendChild(Main())
 
 	// select all script tags inside the app element
