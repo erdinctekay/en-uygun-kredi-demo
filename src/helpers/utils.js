@@ -49,6 +49,10 @@ export const formatShortName = (fullName) => {
 	return formattedName
 }
 
+export const formatNumber = (x, seperatorType = '.') => {
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, seperatorType)
+}
+
 export const limitMaxLength = (value, maxLength) => {
 	if (value.length > maxLength) {
 		return value.substring(0, maxLength)
@@ -130,6 +134,10 @@ export const getNumberFromString = (str) => {
 	const match = str.match(/\d+/)
 	if (!match) return 0
 	return parseInt(match[0], 10)
+}
+
+export const getOnlyDigits = (str) => {
+	return parseFloat(str.replace(/[^0-9]+/g, ''))
 }
 
 export const getRandomNumber = (length) => {
