@@ -85,3 +85,96 @@ html {
 	min-width: 380px;
 	overflow-x: hidden;
 }
+
+[data-bs-theme='light'] {
+	--bs-scrollbar-bg-rgb: var(--bs-dark-rgb);
+	--bs-scroll2-opacity: 0.08;
+	--bs-scroll1-opacity: 0.3;
+	--bs-scroll0-opacity: 0.45;
+	--bs-scroll00-opacity: 0.375;
+}
+
+[data-bs-theme='dark'] {
+	--bs-scrollbar-bg-rgb: var(--bs-light-rgb);
+	--bs-scroll2-opacity: 0.065;
+	--bs-scroll1-opacity: 0.35;
+	--bs-scroll0-opacity: 0.5;
+	--bs-scroll00-opacity: 0.42;
+}
+
+[data-bs-theme='light'] .scrollable:not(:hover) {
+	--bs-scroll1-opacity: 0.12;
+	--bs-scroll2-opacity: 0.045;
+}
+
+[data-bs-theme='dark'] .scrollable:not(:hover) {
+	--bs-scroll1-opacity: 0.12;
+	--bs-scroll2-opacity: 0.03;
+}
+
+/** scrollbar minify **/
+
+@media (hover: hover) and (pointer: fine) {
+	::-webkit-scrollbar,
+	html::-webkit-scrollbar {
+		background-color: rgba(var(--bs-scrollbar-bg-rgb), var(--bs-scroll2-opacity));
+		width: 10px;
+		height: 10px;
+	}
+
+	::-webkit-scrollbar-thumb:hover,
+	html::-webkit-scrollbar-thumb:hover {
+		background-color: rgba(var(--bs-scrollbar-bg-rgb), var(--bs-scroll0-opacity));
+	}
+
+	::-webkit-scrollbar-thumb:active,
+	html::-webkit-scrollbar-thumb:active {
+		background-color: rgba(var(--bs-scrollbar-bg-rgb), var(--bs-scroll00-opacity));
+	}
+
+	:root,
+	:root .scrollable {
+		scrollbar-gutter: stable;
+		scrollbar-width: thin;
+		scrollbar-color: rgba(var(--bs-scrollbar-bg-rgb), var(--bs-scroll1-opacity))
+			rgba(var(--bs-scrollbar-bg-rgb), var(--bs-scroll2-opacity));
+	}
+
+	.scrollable::-webkit-scrollbar,
+	.scrollable::-webkit-scrollbar-track {
+		border-radius: 8px !important;
+	}
+
+	/* scrollbar bg */
+
+	::-webkit-scrollbar-track,
+	html::-webkit-scrollbar-track {
+		background-color: transparent;
+		box-shadow: none;
+		-webkit-box-shadow: none;
+	}
+
+	/* scrollbar self */
+	::-webkit-scrollbar-thumb,
+	html::-webkit-scrollbar-thumb {
+		background-color: rgba(var(--bs-scrollbar-bg-rgb), var(--bs-scroll1-opacity));
+		border-radius: 16px;
+		border: 2px solid transparent;
+		background-clip: padding-box;
+	}
+
+	/* scrollbar buton */
+
+	::-webkit-scrollbar-button,
+	html::-webkit-scrollbar-button {
+		display: none;
+	}
+
+	/** scrollbar width fix **/
+
+	html {
+		overflow-y: scroll;
+	}
+}
+
+/** scrollbar finito **/
