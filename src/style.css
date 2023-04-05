@@ -72,6 +72,19 @@ main {
 	padding-left: var(--bs-gutter-x, var(--container-padding));
 }
 
+input:not(input[type='range']) {
+	background-color: var(--bs-gray-800) !important;
+}
+
+input:not(input[type='range']):hover {
+	background-color: var(--bs-gray-750) !important;
+}
+
+input:not(input[type='range']):focus {
+	background-color: var(--bs-gray-750) !important;
+	border-color: var(--bs-gray-750) !important;
+}
+
 :root {
 	--container-padding: 1.5rem;
 	--zoom-ratio: 1;
