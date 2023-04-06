@@ -1,5 +1,6 @@
-import { setupRangeSlider } from '@/functions/rangeSlider.js'
+import { setupRangeSlider } from '@/functions/rangeSlider'
 import { getOnlyDigits } from '@/helpers/utils'
+import { setOfferConfig } from '@/stores/OfferStore'
 
 export default function Form() {
 	// define
@@ -34,7 +35,7 @@ export default function Form() {
         </div>
 
         <div class="mb-3 pt-4">
-            <button class="btn d-flex flex-row align-items-center w-100 w-sm-25 fw-bold btn-primary py-2">
+            <button id="get-offers" class="btn d-flex flex-row align-items-center w-100 w-sm-25 fw-bold btn-primary py-2">
                 <div class="d-inline-flex align-items-center flex-row flex-grow-1">
                     <span class="w-100 mx-2 text-nowrap"><span>TEKLİFLERİ GÖR</span></span>
                 </div>
@@ -42,7 +43,8 @@ export default function Form() {
         </div>
     `
 
-	form.style.cssText += 'max-width:360px; min-width:348px'
+	form.classList.add('w-100')
+	form.setAttribute('id', 'form')
 
 	window.addEventListener('load', () => {
 		const creditAmountConfig = {
@@ -78,16 +80,29 @@ export default function Form() {
 
 		const arrangeMaturity = (input) => {
 			const amount = getOnlyDigits(input.value)
-			console.log(amount)
+			// console.log(amount)
 			if (amount > 50000) {
-				console.log('bigger')
 				maturityConfig.maxValue = 24
 			} else {
-				console.log('lower')
 				maturityConfig.maxValue = 36
 			}
 			setupRangeSlider(maturityConfig)
 		}
+
+		const submitButton = document.querySelector('#get-offers')
+
+		submitButton.addEventListener('click', () => {
+			const amount = getOnlyDigits(creditAmountConfig.rangeElement.value)
+			const amountSuffix = creditAmountConfig.suffix
+			const maturity = getOnlyDigits(maturityConfig.rangeElement.value)
+			const maturitySuffix = maturityConfig.suffix
+
+			const offerConfig = { amount, amountSuffix, maturity, maturitySuffix }
+			setOfferConfig(offerConfig)
+
+			const event = new Event('fetchOffers')
+			form.dispatchEvent(event)
+		})
 	})
 
 	// return

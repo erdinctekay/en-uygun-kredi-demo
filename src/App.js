@@ -1,5 +1,5 @@
-import Header from '@/components/Header.js'
-import Main from '@/components/Main.js'
+import Header from '@/components/Header'
+import Main from '@/components/Main'
 
 export default function App(app) {
 	app.appendChild(Header())
