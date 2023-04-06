@@ -125,6 +125,11 @@ html {
 	--bs-scroll2-opacity: 0.03;
 }
 
+.btn-dark {
+	--bs-btn-hover-bg: var(--bs-gray-800);
+	--bs-btn-hover-border-color: var(--bs-gray-800);
+}
+
 /** scrollbar minify **/
 
 @media (hover: hover) and (pointer: fine) {
