@@ -173,3 +173,24 @@ export const convertToHttps = (url) => {
 	// if not http/https add it
 	if (!/^(http(s)?:)/.test(url)) return (url = 'https://' + url)
 }
+
+export const toEnglish = (text) => {
+	// built-in String.prototype.normalize method to remove diacritics
+	let normalizedText = text.normalize('NFD')
+
+	// replace non-english chars with their english equivs - preserve case
+	normalizedText = normalizedText.replace(/ı/g, 'i')
+	normalizedText = normalizedText.replace(/İ/g, 'I')
+	normalizedText = normalizedText.replace(/ö/g, 'o')
+	normalizedText = normalizedText.replace(/Ö/g, 'O')
+	normalizedText = normalizedText.replace(/ü/g, 'u')
+	normalizedText = normalizedText.replace(/Ü/g, 'U')
+	normalizedText = normalizedText.replace(/ğ/g, 'g')
+	normalizedText = normalizedText.replace(/Ğ/g, 'G')
+	normalizedText = normalizedText.replace(/ş/g, 's')
+	normalizedText = normalizedText.replace(/Ş/g, 'S')
+	normalizedText = normalizedText.replace(/ç/g, 'c')
+	normalizedText = normalizedText.replace(/Ç/g, 'C')
+
+	return normalizedText
+}
