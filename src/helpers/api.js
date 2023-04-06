@@ -1,41 +1,36 @@
-const apiMethod = (method, body = '') => {
+const apiMethod = (method, body = '', contentType = 'application/json') => {
 	let methods = {
 		GET: {
 			method: method,
 			headers: {
-				'Content-Type': 'application/json',
-				'x-access-token': accessToken,
+				'Content-Type': contentType,
 			},
 		},
 		DELETE: {
 			method: method,
 			headers: {
-				'Content-Type': 'application/json',
-				'x-access-token': accessToken,
+				'Content-Type': contentType,
 			},
 		},
 		POST: {
 			method: method,
 			body: JSON.stringify(body),
 			headers: {
-				'Content-Type': 'application/json',
-				'x-access-token': accessToken,
+				'Content-Type': contentType,
 			},
 		},
 		PUT: {
 			method: method,
 			body: JSON.stringify(body),
 			headers: {
-				'Content-Type': 'application/json',
-				'x-access-token': accessToken,
+				'Content-Type': contentType,
 			},
 		},
 		PATCH: {
 			method: method,
 			body: JSON.stringify(body),
 			headers: {
-				'Content-Type': 'application/json',
-				'x-access-token': accessToken,
+				'Content-Type': contentType,
 			},
 		},
 	}
