@@ -1,30 +1,46 @@
+import { getAllOffers } from '@/services/backend'
+
 let isFetching = false
 let isSuccess = false
 let isError = false
 
+let offers
+
 const fetchOffers = async () => {
-	isFetching = true
-	console.log(fetchState())
+	try {
+		isFetching = true
+		console.log(fetchState())
 
-	await new Promise((resolve) => setTimeout(resolve, 1000)) // wait for 1 second
+		const { amount, maturity } = offerConfig
+		const response = await getAllOffers({ maturity, amount })
+		if (response.status === 200) {
+			let data = await response.json()
+			setOffers(data)
+		}
 
-	isSuccess = true
-	isError = false
-	isFetching = false
+		isSuccess = true
+		isError = false
+		isFetching = false
 
-	console.log(fetchState())
+		console.log(fetchState())
+	} catch (e) {
+		isSuccess = false
+		isError = true
+		isFetching = false
+	}
 
 	return
 }
 
-const returnInitState = async () => {
-	isSuccess = false
-	isError = false
-	isFetching = false
+const getOffers = () => offers
 
-	console.log(fetchState())
-	return
-}
+const setOffers = (array) => (offers = array)
+
+let offerConfig
+
+const setOfferConfig = (object) => (offerConfig = object)
+
+const getOfferConfig = () => offerConfig
 
 const fetchState = () => {
 	let status
@@ -45,45 +61,13 @@ const fetchState = () => {
 	return status
 }
 
-const offers = [
-	{
-		bank: 'Yapıkredi',
-		monthlyPayment: 3500,
-		interestRate: 3.29,
-		totalPayment: 63317.0,
-	},
-	{
-		bank: 'Fibabanka',
-		monthlyPayment: 3500,
-		interestRate: 3.29,
-		totalPayment: 63317.0,
-	},
-	{
-		bank: 'Denizbank',
-		monthlyPayment: 3500,
-		interestRate: 3.29,
-		totalPayment: 63317.0,
-	},
-	{
-		bank: 'Halkbank',
-		monthlyPayment: 3500,
-		interestRate: 3.29,
-		totalPayment: 63317.0,
-	},
-	{
-		bank: 'QNB',
-		monthlyPayment: 3500,
-		interestRate: 3.29,
-		totalPayment: 63317.0,
-	},
-]
+const returnInitState = async () => {
+	isSuccess = false
+	isError = false
+	isFetching = false
 
-const getOffers = () => offers
-
-let offerConfig = {}
-
-const setOfferConfig = (object) => (offerConfig = object)
-
-const getOfferConfig = () => offerConfig
+	console.log(fetchState())
+	return
+}
 
 export { fetchOffers, getOffers, setOfferConfig, getOfferConfig, fetchState, returnInitState }
